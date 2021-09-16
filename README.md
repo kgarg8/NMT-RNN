@@ -35,7 +35,7 @@ onmt_translate -model data/wmt16_ro_en/run/model_step_100000.pt -src data/wmt16_
 
 ## Evaluate
 ```
-sacrebleu data/wmt16_ro_en/pred.txt < data/wmt16_ro_en/run/model_step_100000.pt
+sacrebleu data/wmt16_ro_en/pred.txt < data/wmt16_ro_en/test.ro
 ```
 
 ## Credits

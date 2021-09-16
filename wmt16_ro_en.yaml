@@ -2,7 +2,7 @@ save_data: data/wmt16_ro_en/run/
 ## Where the vocab(s) will be written
 src_vocab: data/wmt16_ro_en/run/vocab.src
 # tgt_vocab: data/wmt16_ro_en/run/vocab.tgt
-overwrite: False
+# overwrite: False
 
 # Corpus opts:
 data:
@@ -31,7 +31,7 @@ src_vocab_size: 50000
 tgt_vocab_size: 50000
 
 # General opts
-save_model: data/wmt/run/model
+save_model: data/wmt16_ro_en/run/model
 keep_checkpoint: 50
 save_checkpoint_steps: 10000
 average_decay: 0.0005
