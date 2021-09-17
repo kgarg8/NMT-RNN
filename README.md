@@ -1,4 +1,4 @@
-# OpenNMT-py: Open-Source Neural Machine Translation
+# Neural Machine Translation using RNN
 
 ## Setup environment
 
