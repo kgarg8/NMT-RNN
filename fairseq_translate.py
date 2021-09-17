@@ -23,5 +23,15 @@ for i in tqdm(range(batches)):
     else:
         y = len(Lines) - i*batch_size
     pred = en2de.translate(Lines[i*batch_size : i*batch_size+y])
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topk=-1)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topk=1)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topk=10)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topk=50)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topk=100)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topp=0.5)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topp=0.8)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], sampling=True, sampling_topp=0.9)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], beam=1)
+    # pred = en2de.translate(Lines[i*batch_size : i*batch_size+y], beam=5)
     for item in pred:
         file2.write("%s\n" % item)
