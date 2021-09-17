@@ -1,8 +1,8 @@
 save_data: data/wmt16_ro_en/run/
 ## Where the vocab(s) will be written
 src_vocab: data/wmt16_ro_en/run/vocab.src
-# tgt_vocab: data/wmt16_ro_en/run/vocab.tgt
-# overwrite: False
+tgt_vocab: data/wmt16_ro_en/run/vocab.tgt
+overwrite: True
 
 # Corpus opts:
 data:
@@ -14,7 +14,7 @@ data:
         path_tgt: data/wmt16_ro_en/valid.ro
 
 # common vocabulary for source and target
-share_vocab: True
+# share_vocab: True
 
 #### Filter
 src_seq_length: 150
