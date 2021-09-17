@@ -38,5 +38,12 @@ onmt_translate -model data/wmt16_ro_en/run/model_step_100000.pt -src data/wmt16_
 sacrebleu data/wmt16_ro_en/pred.txt < data/wmt16_ro_en/test.ro
 ```
 
+## Using FAIRSEQ
+
+```
+python fairseq_translate.py
+```
+
 ## Credits
 [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py)
+[FAIRSEQ](https://github.com/pytorch/fairseq)
