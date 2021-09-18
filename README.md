@@ -152,4 +152,6 @@ python eval_diversity.py "data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt"
 ## Credits
 [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py)
 
-[FAIRSEQ](https://github.com/pytorch/fairseq)
+[FairSeq](https://github.com/pytorch/fairseq)
+
+[SentencePiece](https://github.com/google/sentencepiece#train-sentencepiece-model)
