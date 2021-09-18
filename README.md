@@ -10,37 +10,59 @@ conda install pytorch cudatoolkit=11.1 -c pytorch -c nvidia
 pip install OpenNMT-py
 
 pip install sacrebleu
+
+cd NMT_Vanilla
 ```
 
-## Run commands
 
-## Build Vocab
+## Download data (WMT16 English - Romanian)
+
+```
+python donwload_wmt16_ro_en_data.py
+```
+
+## NMT_Vanilla (w/o SentencePiece)
+
+### Build Vocab
 ```
 onmt_build_vocab -config wmt16_ro_en.yaml -n_sample -1
 ```
 
-## Train
+### Train
 ```
 onmt_train -config wmt16_ro_en.yaml
 ```
 
-## Translate
+### Translate
 ```
-onmt_translate -model data/wmt16_ro_en/run/model_step_100000.pt -src data/wmt16_ro_en/test.en -tgt data/wmt16_ro_en/test.ro -output data/wmt16_ro_en/pred.txt -gpu 0 -verbose
+onmt_translate -model ../data/wmt16_ro_en/run/model_step_100000.pt -src ../data/wmt16_ro_en/test.en -tgt ../data/wmt16_ro_en/test.ro -output ../data/wmt16_ro_en/pred.txt -gpu 0 -verbose
 ```
 
-## Evaluate
+### Evaluate
 ```
-sacrebleu data/wmt16_ro_en/pred.txt < data/wmt16_ro_en/test.ro
+sacrebleu ../data/wmt16_ro_en/pred.txt < ../data/wmt16_ro_en/test.ro
 ```
 
 ## NMT Using FAIRSEQ
 
+### Installing FairSeq
+
+```
+git clone https://github.com/pytorch/fairseq
+
+cd fairseq
+
+pip install --editable ./
+
+cd NMT_FairSeq
+```
+
 ### Translate Pre-Trained Model
 ```
-python fairseq_translate.py # for default config
 
-# Other Sample configs:
+python fairseq_translate.py # default config
+
+# Other sample configs:
 
 --sampling --sampling-topk 10
 
@@ -49,12 +71,12 @@ python fairseq_translate.py # for default config
 --beam 10
 ```
 
-### For Quality (sacreblue metric) Evaluation
+### Quality (sacreblue metric) Evaluation
 ```
 sacrebleu data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt < data/wmt16_en_de/test.de
 ```
 
-### For Diversity Evaluation
+### Diversity Evaluation
 ```
 python eval_diversity.py "data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt"
 ```

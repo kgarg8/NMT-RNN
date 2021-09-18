@@ -1,0 +1,71 @@
+save_data: ../data/wmt16_ro_en/run/
+## Where the vocab(s) will be written
+src_vocab: ../data/wmt16_ro_en/run/vocab.src
+tgt_vocab: ../data/wmt16_ro_en/run/vocab.tgt
+overwrite: True
+
+# Corpus opts:
+data:
+    train:
+        path_src: ../data/wmt16_ro_en/train.en
+        path_tgt: ../data/wmt16_ro_en/train.ro
+    valid:
+        path_src: ../data/wmt16_ro_en/valid.en
+        path_tgt: ../data/wmt16_ro_en/valid.ro
+
+# common vocabulary for source and target
+# share_vocab: True
+
+#### Filter
+src_seq_length: 150
+tgt_seq_length: 150
+
+# silently ignore empty lines in the data
+skip_empty_level: silent
+
+# load from checkpoint
+# train_from: ../data/wmt16_ro_en/run/model_step_100000.pt
+
+# maximum vocab size
+src_vocab_size: 50000
+tgt_vocab_size: 50000
+
+# General opts
+save_model: ../data/wmt16_ro_en/run/model
+keep_checkpoint: 50
+save_checkpoint_steps: 10000
+average_decay: 0.0005
+seed: 1234
+report_every: 100
+train_steps: 100000
+valid_steps: 5000
+
+# Batching
+world_size: 1
+gpu_ranks: [0]
+batch_type: "tokens"
+batch_size: 4096
+valid_batch_size: 256
+batch_size_multiple: 1
+accum_count: [3]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp32"
+optim: "adam"
+learning_rate: 2
+warmup_steps: 8000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+rnn_size: 512
+word_vec_size: 512
+layers: 2
+encoder_type: brnn
+dropout: [0.1]
