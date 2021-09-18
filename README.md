@@ -10,8 +10,6 @@ conda install pytorch cudatoolkit=11.1 -c pytorch -c nvidia
 pip install OpenNMT-py
 
 pip install sacrebleu
-
-cd NMT_Vanilla
 ```
 
 ## NMT_Vanilla (w/o SentencePiece)
@@ -20,6 +18,10 @@ cd NMT_Vanilla
 
 ```
 python donwload_wmt16_ro_en_data.py
+```
+
+```
+cd NMT_Vanilla
 ```
 
 ### Build Vocab
@@ -37,12 +39,63 @@ onmt_train -config wmt16_ro_en.yaml
 onmt_translate -model ../data/wmt16_ro_en/run/model_step_100000.pt -src ../data/wmt16_ro_en/test.en -tgt ../data/wmt16_ro_en/test.ro -output ../data/wmt16_ro_en/pred.txt -gpu 0 -verbose
 ```
 
-### Evaluate
+### Quality Evaluation
 ```
 sacrebleu ../data/wmt16_ro_en/pred.txt < ../data/wmt16_ro_en/test.ro
 ```
 
-## NMT Using FAIRSEQ
+### Diversity Evaluation
+```
+python eval_diversity.py "../data/wmt16_ro_en/pred.txt"
+```
+
+## NMT Using SentencePiece
+
+### Download data (WMT16 English - Romanian)
+
+```
+python donwload_wmt16_ro_en_data.py
+```
+
+Install SentencePiece using instructions on its [repo](https://github.com/google/sentencepiece#train-sentencepiece-model)
+
+```
+cd NMT_SentencePiece
+```
+
+### Data Preparation using SentencePiece
+```
+./prepare_wmt16_ro_en.sh
+```
+
+### Followup Run Commands
+
+### Build Vocab
+```
+onmt_build_vocab -config wmt16_ro_en.yaml -n_sample -1
+```
+
+### Train
+```
+onmt_train -config wmt16_ro_en.yaml
+```
+
+### Generate SentencePiece output (hypothesis)
+```
+onmt_translate -model ../data/wmt16_ro_en/run/model_step_100000.pt -src ../data/wmt16_ro_en/test.en.sp -tgt ../data/wmt16_ro_en/test.ro.sp -output ../data/wmt16_ro_en/run/test.ro.hyp_model_step_100000.sp -gpu 0 -verbose
+```
+
+### De-tokenize the hypothesis using SentencePiece
+```
+spm_decode -model ../data/wmt16_ro_en/wmtenro.model -input_format piece < ../data/wmt16_ro_en/run/test.ro.hyp_model_step_100000.sp > ../data/wmt16_ro_en/run/test.ro.hyp_model_step_100000
+```
+
+### Quality Evaluation
+```
+sacrebleu ../data/wmt16_ro_en/test.ro < ../data/wmt16_ro_en/run/test.ro.hyp_model_step_100000
+```
+
+## NMT Using Pre-Trained Models from FAIRSEQ
 
 ### Download data (WMT16 English - German)
 ```
@@ -57,7 +110,9 @@ git clone https://github.com/pytorch/fairseq
 cd fairseq
 
 pip install --editable ./
+```
 
+```
 cd NMT_FairSeq
 ```
 
@@ -75,7 +130,7 @@ python fairseq_translate.py # default config
 --beam 10
 ```
 
-### Quality (sacreblue metric) Evaluation
+### Quality Evaluation
 ```
 sacrebleu data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt < data/wmt16_en_de/test.de
 ```

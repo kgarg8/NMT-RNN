@@ -1,0 +1,44 @@
+save_data: ../data/wmt16_ro_en/run/
+src_vocab: ../data/wmt16_ro_en/run/vocab.src
+tgt_vocab: ../data/wmt16_ro_en/run/vocab.tgt
+
+# Corpus opts:
+data:
+    train:
+        path_src: ../data/wmt16_ro_en/train.en
+        path_tgt: ../data/wmt16_ro_en/train.ro
+        transforms: [sentencepiece, filtertoolong]
+    valid:
+        path_src: ../data/wmt16_ro_en/valid.en
+        path_tgt: ../data/wmt16_ro_en/valid.ro
+        transforms: [sentencepiece]
+
+# Transform (Subword) related opts:
+src_subword_model: ../data/wmt16_ro_en/wmtenro.model
+tgt_subword_model: ../data/wmt16_ro_en/wmtenro.model
+src_subword_nbest: 1
+src_subword_alpha: 0.0
+tgt_subword_nbest: 1
+tgt_subword_alpha: 0.0
+
+src_seq_length: 150
+tgt_seq_length: 150
+src_vocab_size: 50000
+tgt_vocab_size: 50000
+
+# silently ignore empty lines in the data
+skip_empty_level: silent
+
+# train_from: ../data/wmt16_ro_en/run/model_step_100000.pt
+
+# General opts
+save_model: ../data/wmt16_ro_en/run/model
+keep_checkpoint: 50
+save_checkpoint_steps: 10000
+average_decay: 0.0005
+seed: 1234
+report_every: 100
+train_steps: 100000
+valid_steps: 5000
+world_size: 1
+gpu_ranks: [0]
