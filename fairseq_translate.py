@@ -44,7 +44,7 @@ if __name__ == "__main__":
     parser.add_argument("--sampling" , default=False, action='store_true')
     parser.add_argument("--sampling_topk" , default=0, type=int)
     parser.add_argument("--sampling_topp" , default=0, type=float)
-    parser.add_argument("--beam" , default=1, type=int)
+    parser.add_argument("--beam" , default=5, type=int)
 
     args = parser.parse_args()
     main(args)

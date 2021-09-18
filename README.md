@@ -12,11 +12,7 @@ pip install OpenNMT-py
 pip install sacrebleu
 ```
 
-For using `sentencepiece` for the on-the-fly tokenization, follow the steps on that repository
-
-
 ## Run commands
-
 
 ## Build Vocab
 ```
@@ -38,10 +34,38 @@ onmt_translate -model data/wmt16_ro_en/run/model_step_100000.pt -src data/wmt16_
 sacrebleu data/wmt16_ro_en/pred.txt < data/wmt16_ro_en/test.ro
 ```
 
-## Using FAIRSEQ
+## NMT Using FAIRSEQ
 
+### Translate Pre-Trained Model
 ```
-python fairseq_translate.py
+python fairseq_translate.py # for default config
+
+# Other Sample configs:
+
+--sampling --sampling-topk 10
+
+--sampling --sampling-topp 0.8
+
+--beam 10
+```
+
+### For Quality (sacreblue metric) Evaluation
+```
+sacrebleu data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt < data/wmt16_en_de/test.de
+```
+
+### For Diversity Evaluation
+```
+python eval_diversity.py "data/wmt16_en_de/pred_topk_0_topp_0_beam_5.txt"
+```
+
+### Automate for multiple (decoding) configs
+```
+./script_fairseq_translate.py
+
+./script_fairseq_eval.sh
+
+./script_diversity_fairseq.sh
 ```
 
 ## Credits
