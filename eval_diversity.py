@@ -1,4 +1,4 @@
-#copied from https://github.com/neural-dialogue-metrics/Distinct-N/blob/master/distinct_n/metrics.py
+# Credits: https://github.com/neural-dialogue-metrics/Distinct-N/blob/master/distinct_n/metrics.py; Mobashir Sadat@UIC
 import nltk, numpy as np, sys
 
 def distinct_n_sample_level(sample,n):
@@ -6,7 +6,7 @@ def distinct_n_sample_level(sample,n):
         return 0.0  # Prevent a zero division
     distinct_ngrams = set(nltk.ngrams(sample.split(), n))
     return len(distinct_ngrams) / len(sample.split())
-    #return len(distinct_ngrams) / len(list(nltk.ngrams(sample.split(), n)))
+    # return len(distinct_ngrams) / len(list(nltk.ngrams(sample.split(), n)))
 
 def distinct_n_corpus_level(corpus,n):
     # print(sum(distinct_n_sample_level(sentence, n) for sentence in corpus) , len(corpus))
