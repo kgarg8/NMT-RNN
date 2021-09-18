@@ -14,14 +14,13 @@ pip install sacrebleu
 cd NMT_Vanilla
 ```
 
+## NMT_Vanilla (w/o SentencePiece)
 
-## Download data (WMT16 English - Romanian)
+### Download data (WMT16 English - Romanian)
 
 ```
 python donwload_wmt16_ro_en_data.py
 ```
-
-## NMT_Vanilla (w/o SentencePiece)
 
 ### Build Vocab
 ```
@@ -44,6 +43,11 @@ sacrebleu ../data/wmt16_ro_en/pred.txt < ../data/wmt16_ro_en/test.ro
 ```
 
 ## NMT Using FAIRSEQ
+
+### Download data (WMT16 English - German)
+```
+python donwload_wmt16_en_de_data.py
+```
 
 ### Installing FairSeq
 
