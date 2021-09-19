@@ -17,7 +17,7 @@ pip install sacrebleu
 ### Download data (WMT16 English - Romanian)
 
 ```
-python donwload_wmt16_ro_en_data.py
+python download_wmt16_ro_en_data.py
 ```
 
 ```
@@ -54,7 +54,7 @@ python eval_diversity.py "../data/wmt16_ro_en/pred.txt"
 ### Download data (WMT16 English - Romanian)
 
 ```
-python donwload_wmt16_ro_en_data.py
+python download_wmt16_ro_en_data.py
 ```
 
 Install SentencePiece using instructions on its [repo](https://github.com/google/sentencepiece#train-sentencepiece-model)
@@ -99,7 +99,7 @@ sacrebleu ../data/wmt16_ro_en/test.ro < ../data/wmt16_ro_en/run/test.ro.hyp_mode
 
 ### Download data (WMT16 English - German)
 ```
-python donwload_wmt16_en_de_data.py
+python download_wmt16_en_de_data.py
 ```
 
 ### Installing FairSeq
